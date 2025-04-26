@@ -1,27 +1,21 @@
 use std::env;
-
-use google_cloud_aiplatform_v1::model::part::Data;
-//Need to implement the following crates in Cargo.toml
-//tokio = { version = "1", features = ["full"] }
-//serde = { version = "1", features = ["derive"] }
-//serde_json = "1"
-//reqwest = { version = "0.11", features = ["json"] }
-//google-auth = "0.2"
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 struct GenerateContentResponse {
     candidates: Vec<Candidate>,
-    usageMetadata: UsageMetadata,
+    usage_metadata: UsageMetadata,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 struct Candidate {
     content: Content,
-    finishReason: String,
+    finish_reason: String,
     index: Option<i32>,
-    safetyRatings: Vec<SafetyRating>,
+    safety_ratings: Vec<SafetyRating>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -36,10 +30,11 @@ struct Part {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 struct UsageMetadata {
-    promptTokenCount: i32,
-    candidatesTokenCount: i32,
-    totalTokenCount: i32,
+    prompt_token_count: i32,
+    candidates_token_count: i32,
+    total_token_count: i32,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -129,4 +124,3 @@ fn generate_request_body(prompt: String) -> Value {
         ]
     })
 }
-

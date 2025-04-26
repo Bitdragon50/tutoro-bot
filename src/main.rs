@@ -39,7 +39,7 @@ impl EventHandler for Handler {
         println!("user:{}\nmessage: {}", msg.author.name, msg.content);
         if !msg.mentions.is_empty() && msg.mentions_me(&ctx.http()).await.unwrap() {
             println!("mentions: {:?}", &msg.mentions[0].name);
-            let tutor = Tutoro::new(ctx.clone(), msg.clone());
+            let tutor = Tutoro::new("ollama", ctx.clone(), msg.clone());
             tutor.respond_to_message().await;            
         }
     }
